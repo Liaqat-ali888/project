@@ -1,0 +1,215 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    STUDENT TRACKER - SETUP INSTRUCTIONS                     ║
+║                      DATABASE: student_db (NEW)                             ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+📋 FILES INCLUDED:
+────────────────────────────────────────────────────────────────────────────────
+✓ DBConnection.java
+✓ Student.java
+✓ Subject.java
+✓ Topic.java
+✓ Deadline.java
+✓ AssignmentDeadline.java
+✓ ExamDeadline.java
+✓ ProgressReport.java
+✓ StudentDAO.java
+✓ LoginGUI.java
+✓ DashboardGUI.java
+✓ Main.java
+✓ schema.sql (DATABASE: student_db)
+✓ mysql-connector-j-9.6.0.jar (Already provided)
+
+────────────────────────────────────────────────────────────────────────────────
+🔧 STEP 1: CREATE DATABASE
+────────────────────────────────────────────────────────────────────────────────
+
+OPTION A - Using Command Line:
+  1. Open Command Prompt/Terminal
+  2. Navigate to project folder
+  3. Run:
+     mysql -u root -p < schema.sql
+  4. When prompted, enter your MySQL password
+  5. If no password, just press Enter
+
+OPTION B - Using MySQL Workbench:
+  1. Open MySQL Workbench
+  2. Click File → Open SQL Script
+  3. Select schema.sql
+  4. Click Execute (Ctrl+Shift+Enter)
+
+OPTION C - Manual:
+  1. Open MySQL Command Line
+  2. Type: mysql -u root -p
+  3. Enter password (or press Enter if no password)
+  4. Copy & paste content of schema.sql
+  5. Press Enter
+
+────────────────────────────────────────────────────────────────────────────────
+✅ VERIFY DATABASE CREATED:
+────────────────────────────────────────────────────────────────────────────────
+
+In MySQL:
+  SHOW DATABASES;
+  
+Should show: student_db
+
+  USE student_db;
+  SHOW TABLES;
+
+Should show:
+  - students
+  - subjects
+  - topics
+  - deadlines
+
+────────────────────────────────────────────────────────────────────────────────
+🔧 STEP 2: COMPILE CODE
+────────────────────────────────────────────────────────────────────────────────
+
+In Command Prompt/Terminal (in project folder):
+
+Windows/Mac/Linux:
+  javac -cp mysql-connector-j-9.6.0.jar *.java
+
+If error, try:
+  javac -cp .:mysql-connector-j-9.6.0.jar *.java
+
+Windows (with semicolon):
+  javac -cp .;mysql-connector-j-9.6.0.jar *.java
+
+────────────────────────────────────────────────────────────────────────────────
+🚀 STEP 3: RUN APPLICATION
+────────────────────────────────────────────────────────────────────────────────
+
+In Command Prompt/Terminal:
+
+Windows/Mac/Linux:
+  java -cp .:mysql-connector-j-9.6.0.jar Main
+
+Windows (with semicolon):
+  java -cp .;mysql-connector-j-9.6.0.jar Main
+
+────────────────────────────────────────────────────────────────────────────────
+🔐 LOGIN CREDENTIALS:
+────────────────────────────────────────────────────────────────────────────────
+
+Username: admin
+Password: 123
+
+────────────────────────────────────────────────────────────────────────────────
+💡 DATABASE CREDENTIALS (in DBConnection.java):
+────────────────────────────────────────────────────────────────────────────────
+
+Host: localhost
+Port: 3306
+Database: student_db
+User: root
+Password: (empty)
+
+TO CHANGE PASSWORD:
+  Edit DBConnection.java line 11:
+  
+  OLD: "baqa123"
+  NEW: "" (empty) or your password
+  
+  Recompile and run.
+
+────────────────────────────────────────────────────────────────────────────────
+🎯 APPLICATION FEATURES:
+────────────────────────────────────────────────────────────────────────────────
+
+LEFT PANEL (Students):
+  • View all students
+  • Add new student
+  • Delete student
+
+CENTER PANEL (Subjects):
+  • View all subjects for selected student
+  • Add new subject
+  • Delete subject
+
+CENTER PANEL (Topics):
+  • View all topics for selected subject
+  • Add new topic
+  • Delete topic
+  • Mark as complete
+  • Set confidence level (1-5)
+
+RIGHT PANEL (Deadlines):
+  • View all deadlines
+  • Add new deadline
+  • Delete deadline
+
+RIGHT PANEL (Progress Report):
+  • Total topics count
+  • Completed topics count
+  • Completion percentage
+  • Average confidence level
+
+────────────────────────────────────────────────────────────────────────────────
+🐛 TROUBLESHOOTING:
+────────────────────────────────────────────────────────────────────────────────
+
+ERROR: "DB Connection Failed"
+──────────────────────────────
+  ✗ MySQL not running
+  ✗ Database student_db not created
+  ✗ Wrong password in DBConnection.java
+
+SOLUTION:
+  1. Start MySQL server
+  2. Run schema.sql
+  3. Check credentials in DBConnection.java
+
+ERROR: "Exception in thread main"
+─────────────────────────────────
+  ✗ JAR file not found
+  ✗ Wrong classpath
+
+SOLUTION:
+  1. Verify mysql-connector-j-9.6.0.jar is in same folder
+  2. Recompile with correct -cp flag
+
+ERROR: "Table doesn't exist"
+────────────────────────────
+  ✗ schema.sql not run
+  ✗ Database not created
+
+SOLUTION:
+  1. Run schema.sql
+  2. Verify tables exist: SHOW TABLES;
+
+────────────────────────────────────────────────────────────────────────────────
+📊 SAMPLE DATA:
+────────────────────────────────────────────────────────────────────────────────
+
+Students:
+  - Ali Hassan
+  - Sara Khan
+  - Ahmed Ali
+
+Subjects:
+  - Object Oriented Programming (Ali)
+  - Data Structures (Ali)
+  - Database Systems (Sara)
+  - Web Development (Sara)
+
+Topics: 10+ pre-populated
+Deadlines: 5+ pre-populated
+
+All ready to test immediately!
+
+────────────────────────────────────────────────────────────────────────────────
+✨ NOTES:
+────────────────────────────────────────────────────────────────────────────────
+
+✓ Code uses your original structure
+✓ Database schema name changed to: student_db
+✓ All errors fixed
+✓ Working JDBC integration
+✓ Full CRUD operations working
+✓ Professional GUI
+✓ Sample data included
+
+────────────────────────────────────────────────────────────────────────────────
